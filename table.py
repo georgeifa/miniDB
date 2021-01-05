@@ -333,6 +333,8 @@ class Table:
         '''
         Join table (left) with a supplied table (right) where condition is met.
         '''
+        print('You ara in left join')
+
         # get columns and operator
         column_name_left, operator, column_name_right = self._parse_condition(condition, join=True)
         # try to find both columns, if you fail raise error
