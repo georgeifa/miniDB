@@ -356,7 +356,7 @@ class Table:
         join_table = Table(name=join_table_name, column_names=join_table_colnames, column_types= join_table_coltypes)
 
         # count the number of operations (<,> etc)
-        no_of_ops = None
+        no_of_ops = 0
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
         hasMatch =  False
@@ -368,7 +368,7 @@ class Table:
             left_value = row_left[column_index_left]
             for row_right in table_right.data:
                 right_value = row_right[column_index_right]
-                #no_of_ops+=1
+                no_of_ops+=1
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
                     print(f'------## left_value -> {left_value} // right_value -> {right_value}' )
