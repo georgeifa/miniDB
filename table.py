@@ -372,7 +372,7 @@ class Table:
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
                     hasMatch = True
-            Print(f'------## hasMatch -> {hasMatch}' )
+            print(f'------## hasMatch -> {hasMatch}' )
             if not hasMatch:
                 for column in table_right.columns:
                     print("Column")
