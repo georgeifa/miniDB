@@ -368,7 +368,7 @@ class Table:
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
                     hasMatch = True
-            if !hasMatch:
+            if not hasMatch:
                 for column in table_right.columns:
                     row_null.append('null')
                 join_table._insert(row_left+row_null)
