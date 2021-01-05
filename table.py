@@ -360,9 +360,11 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
         hasMatch =  False
+        row_null = []
+
 
         for row_left in self.data:
-            row_null = []
+            row_null.clear()
             left_value = row_left[column_index_left]
             for row_right in table_right.data:
                 right_value = row_right[column_index_right]
