@@ -356,7 +356,7 @@ class Table:
         join_table = Table(name=join_table_name, column_names=join_table_colnames, column_types= join_table_coltypes)
 
         # count the number of operations (<,> etc)
-        no_of_ops = 0
+        no_of_ops = None
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
         hasMatch =  False
