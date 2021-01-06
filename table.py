@@ -360,17 +360,15 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
         hasMatch =  False
-        row_null = []
-
 
         for row_left in self.data:
-            row_null.clear()
             left_value = row_left[column_index_left]
             for row_right in table_right.data:
                 right_value = row_right[column_index_right]
                 no_of_ops+=1
-                print(f'------## left_value -> {left_value} // right_value -> {right_value}' )        
+                print(f'------## left_value -> {left_value} // right_value -> {right_value}' )
                 if get_op(operator, left_value, right_value): #EQ_OP
+                print(f'------## left_value -> {left_value} / operator -> {operator}/ right_value -> {right_value}' )        
                     join_table._insert(row_left+row_right)
                     hasMatch = True
             print(f'------## hasMatch -> {hasMatch}' )
@@ -378,7 +376,7 @@ class Table:
                 for column in table_right.columns:
                     print("Column")
                     row_null.append('null')
-                join_table._insert(row_left+row_null)
+                join_table._insert(row_left)
 
 
         print(f'## Select ops no. -> {no_of_ops}')
