@@ -361,7 +361,7 @@ class Table:
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
         for row_left in self.data:
-            hasMatch =  False        
+            hasMatch =  False
             left_value = row_left[column_index_left]
             for row_right in table_right.data:
                 right_value = row_right[column_index_right]
@@ -375,7 +375,6 @@ class Table:
             if not hasMatch:
                 for column in table_right.columns:
                     print("Column")
-                    row_null.append('null')
                 join_table._insert(row_left)
 
 
