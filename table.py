@@ -378,7 +378,7 @@ class Table:
             if not hasMatch:
                 for column in table_right.columns:
                     print("Column")
-                    if column.coltype == string:
+                    if type(column) is str:
                         row_null.append('null')
                     else:
                         row_null.append(0)
