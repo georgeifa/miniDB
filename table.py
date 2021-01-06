@@ -368,7 +368,7 @@ class Table:
                 no_of_ops+=1
                 print(f'------## left_value -> {left_value} // right_value -> {right_value}' )
                 if get_op(operator, left_value, right_value): #EQ_OP
-                print(f'------## left_value -> {left_value} / operator -> {operator}/ right_value -> {right_value}' )        
+                    print(f'------## left_value -> {left_value} / operator -> {operator}/ right_value -> {right_value}' )        
                     join_table._insert(row_left+row_right)
                     hasMatch = True
             print(f'------## hasMatch -> {hasMatch}' )
