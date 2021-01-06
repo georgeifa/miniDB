@@ -378,10 +378,10 @@ class Table:
             if not hasMatch:
                 for column in table_right.column_types:
                     print(f'-----%%%% column -> {column}')
-                    #if isinstance(column,str):
-                    row_null.append(None)
-                    #else:
-                    #    row_null.append(0)
+                    if isinstance(column,int):
+                        row_null.append(0)
+                    else:
+                        row_null.append(None)        
                 join_table._insert(row_left + row_null)
 
 
