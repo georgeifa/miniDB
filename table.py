@@ -379,7 +379,7 @@ class Table:
                 for column in table_right.columns:
                     print("Column")
                     row_null.append('null')
-                join_table._insert(row_left)
+                join_table._insert(row_left + row_null)
 
 
         print(f'## Select ops no. -> {no_of_ops}')
