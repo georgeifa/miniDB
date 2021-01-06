@@ -372,7 +372,7 @@ class Table:
                     hasMatch = True
             if not hasMatch:
                 for column in table_right.column_types:
-                    if column == type(1):
+                    if column == type(1) or column == type(1.2):
                         row_null.append(0)
                     else:
                         row_null.append(None)
@@ -428,7 +428,7 @@ class Table:
                         hasMatch = True
                 if not hasMatch:
                     for column in self.column_types:
-                        if column == type(1):
+                        if column == type(1) or column == type(1.2):
                             row_null.append(0)
                         else:
                             row_null.append(None)
@@ -483,7 +483,7 @@ class Table:
                         hasMatch = True
                 if not hasMatch:
                     for column in table_right.column_types:
-                        if column == type(1):
+                        if column == type(1) or column == type(1.2):
                             row_null.append(0)
                         else:
                             row_null.append(None)
