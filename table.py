@@ -357,26 +357,28 @@ class Table:
         no_of_ops = 0
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
+
+        #create a row with NoneObjects or 0  (for str is None , for bool is false and for numbers is 0)
         row_null =[]
 
 
         for row_left in self.data:
-            row_null.clear()
-            hasMatch =  False
+            row_null.clear() # clear the null row for every new row of the left table
+            hasMatch =  False # a bool that shows if the current row of the left table has found a matching row from the right table
             left_value = row_left[column_index_left]
             for row_right in table_right.data:
                 right_value = row_right[column_index_right]
                 no_of_ops+=1
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
-                    hasMatch = True
-            if not hasMatch:
-                for column in table_right.column_types:
-                    if column == type(1) or column == type(1.2):
-                        row_null.append(0)
+                    hasMatch = True #if you find a matching row make it true
+            if not hasMatch: #if no matching row is found
+                for column in table_right.column_types: # for every column in the right table
+                    if column == type(1) or column == type(1.2): # check the type of the column
+                        row_null.append(0) #if its a number add 0 to the null_row list
                     else:
-                        row_null.append(None)
-                join_table._insert(row_left + row_null)
+                        row_null.append(None)# else add none
+                join_table._insert(row_left + row_null) # add the new row to the join table
 
 
         print(f'## Select ops no. -> {no_of_ops}')
@@ -413,6 +415,8 @@ class Table:
             no_of_ops = 0
             # this code is dumb on purpose... it needs to illustrate the underline technique
             # for each value in left column and right column, if condition, append the corresponding row to the new table
+
+            #right join works with a similar way as the left join. Only difference is that it is inverted
             row_null =[]
 
 
@@ -441,9 +445,11 @@ class Table:
 
             return join_table
 
+
+
     def _outer_join(self, table_right: Table, condition):
             '''
-            Join table (left) with a supplied table (right). Show all rows from right table and the matched ones from the left one
+            Join table (left) with a supplied table (right). Show all rows from both tables and match the rows where the condition is met
             '''
             # get columns and operator
             column_name_left, operator, column_name_right = self._parse_condition(condition, join=True)
@@ -470,6 +476,8 @@ class Table:
             # this code is dumb on purpose... it needs to illustrate the underline technique
             # for each value in left column and right column, if condition, append the corresponding row to the new table
             row_null =[]
+
+            #outer join works with a combination of the left and right join
 
             for row_left in self.data:
                 row_null.clear()
