@@ -377,7 +377,7 @@ class Table:
             print(f'------## hasMatch -> {hasMatch}' )
             if not hasMatch:
                 for column in table_right.columns:
-                    print("Column")
+                    print(f'-----%%%% column -> {column}')
                     if type(column) is str:
                         row_null.append('null')
                     else:
