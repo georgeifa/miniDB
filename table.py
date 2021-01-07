@@ -547,7 +547,7 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
-        if column_name_right != table_right.column_names[table_right.pk_idx]:
+        if column_index_right != table_right.pk_idx:
             raise Exception(f'Column is not PK. Indexes suport only PK column. Aborting')
 
         for row_left in self.data:
