@@ -556,7 +556,7 @@ class Table:
         #hasIndex = _has_index(f'{table_right._name}')
         #if hasIndex:
 
-        right_table_index = database._has_index(f'{table_right._name}')
+        right_table_index = _has_index(f'{table_right._name}')
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
