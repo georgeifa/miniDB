@@ -560,7 +560,7 @@ class Table:
             # bt.find(operator, value)
 
             #row_right_index = bt.find(operator, left_value)
-            for row_right_index in bt.find(operator, left_value)
+            for row_right_index in bt.find(operator, left_value):
                 row_right.append(table_right.data[row_right_index])
 
             #for row_right in table_right.data:
