@@ -1,7 +1,6 @@
 from __future__ import annotations
 from tabulate import tabulate
 import pickle
-from database import _has_index
 import os
 from misc import get_op, split_condition
 
