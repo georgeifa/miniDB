@@ -560,7 +560,7 @@ class Table:
             #    right_value = row_right[column_index_right]
             #    if get_op(operator, left_value, right_value): #EQ_OP
             if len(row_right) > 0:
-                join_table._insert(row_left+row_right)
+                join_table._insert(row_left+row_right+None+None)
 
         print(f'# Left table size -> {len(self.data)}')
         print(f'# Right table size -> {len(table_right.data)}')
