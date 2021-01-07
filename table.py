@@ -1,6 +1,7 @@
 from __future__ import annotations
 from tabulate import tabulate
 import pickle
+from database import Database
 import os
 from misc import get_op, split_condition
 
@@ -556,7 +557,7 @@ class Table:
         #hasIndex = _has_index(f'{table_right._name}')
         #if hasIndex:
 
-        right_table_index = table_right.index_name
+        right_table_index = database._has_index(f'{table_right._name}')
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
