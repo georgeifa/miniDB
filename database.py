@@ -489,6 +489,10 @@ class Database:
             print(f'Table/Tables are currently locked')
             return
 
+        if not self._has_index(right_table_name):
+            print(f'The inner table (right one) does not have a index on its PK. An index is needed for this join.')
+            return
+
         res = self.tables[left_table_name]._Index_Nested_Loop_join(self.tables[right_table_name], condition)
         if save_as is not None:
             res._name = save_as
