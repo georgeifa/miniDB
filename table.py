@@ -532,8 +532,8 @@ class Table:
         column_name_left, operator, column_name_right = self._parse_condition(condition, join=True)
         # try to find both columns, if you fail raise error
         #try:
-            column_index_left = self.column_names.index(column_name_left)
-            column_index_right = table_right.column_names.index(column_name_right)
+        column_index_left = self.column_names.index(column_name_left)
+        column_index_right = table_right.column_names.index(column_name_right)
         #except:
         #    raise Exception(f'Columns dont exist in one or both tables.')
 
