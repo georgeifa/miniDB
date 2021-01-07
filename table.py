@@ -274,7 +274,6 @@ class Table:
         dict = {(key):([self.data[i] for i in idx] if key=="data" else value) for key, value in self.__dict__.items()}
         return Table(load=dict)
 
-
     def _sort(self, column_name, asc=False):
         '''
         Same as order by, but its persistant
@@ -284,7 +283,6 @@ class Table:
         # print(idx)
         self.data = [self.data[i] for i in idx]
         self._update()
-
 
     def _inner_join(self, table_right: Table, condition):
         '''
@@ -327,7 +325,6 @@ class Table:
         print(f'# Right table size -> {len(table_right.data)}')
 
         return join_table
-
 
     def _left_join(self, table_right: Table, condition):
         '''
@@ -445,8 +442,6 @@ class Table:
 
             return join_table
 
-
-
     def _outer_join(self, table_right: Table, condition):
             '''
             Join table (left) with a supplied table (right). Show all rows from both tables and match the rows where the condition is met
@@ -523,7 +518,6 @@ class Table:
 
             return join_table
 
-
     def _Index_Nested_Loop_join(self, table_right: Table, condition):
         '''
         Join table (left) with a supplied table (right) where condition is met.
@@ -553,8 +547,8 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
-
-        right_table_index =
+        if column_name_right != table_right.column_names[table_name.pk_idx]:
+            raise Exception(f'Column is not PK. Indexes suport only PK column. Aborting')
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
