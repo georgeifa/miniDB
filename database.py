@@ -493,8 +493,11 @@ class Database:
         if not self._has_index(right_table_name):
             print(f'The inner table (right one) does not have a index on its PK. An index is needed for this join.')
             return
+        else:
+            index_name = self.select('meta_indexes', '*', f'table_name=={right_table_name}', return_object=True).index_name[0]
+            bt = self._load_idx(index_name)
 
-        res = self.tables[left_table_name]._Index_Nested_Loop_join(self.tables[right_table_name], condition)
+        res = self.tables[left_table_name]._Index_Nested_Loop_join(self.tables[right_table_name], bt, condition)
         if save_as is not None:
             res._name = save_as
             self.table_from_object(res)
