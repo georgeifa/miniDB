@@ -549,8 +549,8 @@ class Table:
 
         if column_index_right != table_right.pk_idx:
             raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
-            
-        hasIndex = table_right.columns[column_index_right]._has_index()
+
+        hasIndex = table_right._has_index()
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
