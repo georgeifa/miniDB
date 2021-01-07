@@ -358,7 +358,6 @@ class Table:
         #create a row with NoneObjects or 0  (for str is None , for bool is false and for numbers is 0)
         row_null =[]
 
-
         for row_left in self.data:
             row_null.clear() # clear the null row for every new row of the left table
             hasMatch =  False # a bool that shows if the current row of the left table has found a matching row from the right table
@@ -444,7 +443,8 @@ class Table:
 
     def _outer_join(self, table_right: Table, condition):
             '''
-            Join table (left) with a supplied table (right). Show all rows from both tables and match the rows where the condition is met
+            Join table (left) with a supplied table (right).
+            Show all rows from both tables and match the rows where the condition is met
             '''
             # get columns and operator
             column_name_left, operator, column_name_right = self._parse_condition(condition, join=True)
@@ -503,7 +503,7 @@ class Table:
                         hasMatch = True
                 if not hasMatch:
                     for column in self.column_types:
-                        if column == type(1):
+                        if column == type(1) or column == type(1.2):
                             row_null.append(0)
                         else:
                             row_null.append(None)
