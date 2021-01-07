@@ -548,7 +548,9 @@ class Table:
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
         if column_index_right != table_right.pk_idx:
-            raise Exception(f'Column is not PK. Indexes suport only PK column. Aborting')
+            raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
+            
+        hasIndex = table_right.columns[column_index_right]._has_index()
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
