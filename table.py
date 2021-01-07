@@ -563,7 +563,7 @@ class Table:
             row_right_index = bt.find(operator, left_value)
             #for row_right_index in bt.find(operator, left_value):
                 #row_right.append(table_right.data[row_right_index])
-
+            print(f'#######-----bt.find ------> {row_right_index}')
             #for row_right in table_right.data:
             #    right_value = row_right[column_index_right]
             #    if get_op(operator, left_value, right_value): #EQ_OP
