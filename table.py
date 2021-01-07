@@ -560,14 +560,15 @@ class Table:
             # bt.find(operator, value)
 
             #row_right_index = bt.find(operator, left_value)
-            for row_right_index in bt.find(operator, left_value):
+            row_right_index = bt.find(operator, left_value)
+            #for row_right_index in bt.find(operator, left_value):
                 row_right.append(table_right.data[row_right_index])
 
             #for row_right in table_right.data:
             #    right_value = row_right[column_index_right]
             #    if get_op(operator, left_value, right_value): #EQ_OP
-            if len(row_right) > 0:
-                join_table._insert(row_left+row_right+row_null)
+            if row_right_index > 0:
+                join_table._insert(row_left+table_right.data[row_right_index])
 
         print(f'# Left table size -> {len(self.data)}')
         print(f'# Right table size -> {len(table_right.data)}')
