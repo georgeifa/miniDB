@@ -556,7 +556,7 @@ class Table:
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
-
+            row_right = []
             # bt.find(operator, value)
 
             #row_right_index = bt.find(operator, left_value)
