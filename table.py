@@ -524,6 +524,8 @@ class Table:
             return join_table
 
 
+from database import _has_index
+
     def _Index_Nested_Loop_join(self, table_right: Table, condition):
         '''
         Join table (left) with a supplied table (right) where condition is met.
@@ -553,10 +555,8 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
-        #hasIndex = _has_index(f'{table_right._name}')
-        #if hasIndex:
 
-        right_table_index = tables['meta_indexes'].table_right
+        right_table_index =
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
