@@ -521,6 +521,7 @@ class Table:
     def _Index_Nested_Loop_join(self, table_right: Table, bt, condition ):
         '''
         Join table (left) with a supplied table (right) where condition is met.
+        The search through the right table will be done by indexes
         '''
         # get columns and operator
         column_name_left, operator, column_name_right = self._parse_condition(condition, join=True)
@@ -546,22 +547,19 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
+        # we check that column that the condition is on is the PK as indexes support only this column
         if column_index_right != table_right.pk_idx:
             raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
 
-
-        row_null = []
-        row_null.append(0)
-        row_null.append(0)
-
+        # for every row in the left table
         for row_left in self.data:
-            left_value = row_left[column_index_left]
-            row_right = []
+            left_value = row_left[column_index_left] # take the value on the condition
 
-            row_right_index = bt.find(operator, left_value)
+            row_right = [] # create an empty list for the right row (mostly so that the code will look nicer)
+            row_right_index = bt.find(operator, left_value) # get the index of the row that matches with the condition
 
-            if len(row_right_index) > 0:
-                row_right = table_right.data[row_right_index[0]]
+            if len(row_right_index) > 0: # if there is a row found
+                row_right = table_right.data[row_right_index[0]] # get the row from the right table with the row index from above
                 join_table._insert(row_left+row_right)
 
         print(f'# Left table size -> {len(self.data)}')
