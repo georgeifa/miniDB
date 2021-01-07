@@ -490,7 +490,7 @@ class Table:
                             row_null.append(0) #if its a number add 0 to the null_row list
                         else:
                             row_null.append(None)# else add none
-                    join_table._insert(row_left + row_null
+                    join_table._insert(row_left + row_null)
 
             for row_right in table_right.data:
                 row_null.clear()
