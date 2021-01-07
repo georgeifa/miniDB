@@ -524,8 +524,6 @@ class Table:
             return join_table
 
 
-from database import _has_index
-
     def _Index_Nested_Loop_join(self, table_right: Table, condition):
         '''
         Join table (left) with a supplied table (right) where condition is met.
