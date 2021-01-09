@@ -610,21 +610,22 @@ class Table:
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_result = True
                     join_table._insert(row_left+row_right)
-                if operator == "=":
-                    if left_value < right_value:
-                        break
-                elif operator == "<":
-                    if left_value >= right_value:
-                        break
-                elif operator == "<=":
-                    if left_value > right_value:
-                        break
-                elif operator == ">=":
-                    if left_value < right_value:
-                        break
-                elif operator == ">":
-                    if left_value <= right_value:
-                        break
+                else:
+                    if operator == "=":
+                        if left_value < right_value:
+                            break
+                    elif operator == "<":
+                        if left_value >= right_value:
+                            break
+                    elif operator == "<=":
+                        if left_value > right_value:
+                            break
+                    elif operator == ">=":
+                        if left_value < right_value:
+                            break
+                    elif operator == ">":
+                        if left_value <= right_value:
+                            break
 
 
         print(f'## Select ops no. -> {no_of_ops}')
