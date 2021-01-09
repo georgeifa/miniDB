@@ -564,31 +564,6 @@ class Table:
 
         return join_table
 
-    def _merging(self,row_left, table_right :Table,column_index_right,join_table :Table,operator,left_value,no_of_ops):
-        for row_right in table_right.data:
-            right_value = row_right[column_index_right]
-            no_of_ops+=1
-            if get_op(operator, left_value, right_value): #EQ_OP
-                join_table._insert(row_left+row_right)
-            else:
-                if operator == "=":
-                    if left_value < right_value:
-                        return join_table , no_of_ops
-                elif operator == "<":
-                    if left_value >= right_value:
-                        return join_table , no_of_ops
-                elif operator == "<=":
-                    if left_value > right_value:
-                        return join_table , no_of_ops
-                elif operator == ">=":
-                    if left_value < right_value:
-                        return join_table , no_of_ops
-                elif operator == ">":
-                    if left_value <= right_value:
-                        return join_table , no_of_ops
-
-            return join_table , no_of_ops
-
     def _sort_merge_join(self, table_right: Table, condition , asc = False):
         '''
         Join table (left) with a supplied table (right). Show all rows from left table and the matched ones from the right one
@@ -625,23 +600,43 @@ class Table:
         self._sort(column_name_left, asc=asc)
         table_right._sort(column_name_right, asc=asc)
 
-        join_table_tmp , no_of_ops = self._merging(row_left, table_right, column_index_right, join_table, operator, left_value, no_of_ops)
-
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
-            if join_table_tmp.data != join_table.data:
-                print(f'##------ Join_tmp size -> {len(join_table_tmp.data)}')
-                print(f'##------ Join_tmp -> {join_table_tmp.data}')
-                for row_join_table_tmp in join_table_tmp.data:
-                    #print(f'##------ row_join -> {row_join_table_tmp}')
-                    join_table._insert(row_join_table_tmp)
+            loop_no = 0
+            for row_right in table_right.data:
+                loop_no+=1
+                right_value = row_right[column_index_right]
+                no_of_ops+=1
+                if get_op(operator, left_value, right_value): #EQ_OP
+                    join_table._insert(row_left+row_right)
+                else:
+                    if operator == "=":
+                        if left_value < right_value:
+                            print(f'YOU ARE IN LOOP {loop_no}')
+                            break
+                    elif operator == "<":
+                        if left_value >= right_value:
+                            break
+                    elif operator == "<=":
+                        if left_value > right_value:
+                            break
+                    elif operator == ">=":
+                        if left_value < right_value:
+                            break
+                    elif operator == ">":
+                        if left_value <= right_value:
+                            break
+                print(f'YOU ARE OUT OF LOOP {loop_no}')
+
 
         print(f'## Select ops no. -> {no_of_ops}')
         print(f'# Left table size -> {len(self.data)}')
         print(f'# Right table size -> {len(table_right.data)}')
 
         return join_table
+
+
 
 
     def show(self, no_of_rows=None, is_locked=False):
