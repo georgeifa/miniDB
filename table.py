@@ -627,6 +627,10 @@ class Table:
                         break
 
 
+        print(f'## Select ops no. -> {no_of_ops}')
+        print(f'# Left table size -> {len(self.data)}')
+        print(f'# Right table size -> {len(table_right.data)}')
+
         return join_table
 
 
