@@ -7,19 +7,15 @@ from misc import get_op, split_condition
 class Table:
     '''
     Table object represents a table inside a database
-
     A Table object can be created either by assigning:
         - a table name (string)
         - column names (list of strings)
         - column types (list of functions like str/int etc)
         - primary (name of the primary key column)
-
     OR
-
         - by assigning a value to the variable called load. This value can be:
             - a path to a Table file saved using the save function
             - a dictionary that includes the appropriate info (all the attributes in __init__)
-
     '''
     def __init__(self, name=None, column_names=None, column_types=None, primary_key=None, load=None):
 
@@ -473,7 +469,7 @@ class Table:
             row_null =[]
 
             #outer join works with a combination of the left and right join
-            #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not 
+            #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not
 
             for row_left in self.data:
                 row_null.clear()
@@ -567,6 +563,66 @@ class Table:
         print(f'# Right table size -> {len(table_right.data)}')
 
         return join_table
+
+    def _sort_merge_join(self, table_right: Table, condition):
+        '''
+        Join table (left) with a supplied table (right). Show all rows from left table and the matched ones from the right one
+        '''
+        # get columns and operator
+        column_name_left, operator, column_name_right = self._parse_condition(condition, join=True)
+        # try to find both columns, if you fail raise error
+        try:
+            column_index_left = self.column_names.index(column_name_left)
+            column_index_right = table_right.column_names.index(column_name_right)
+        except:
+            raise Exception(f'Columns dont exist in one or both tables.')
+
+        # get the column names of both tables with the table name in front
+        # ex. for left -> name becomes left_table_name_name etc
+        left_names = [f'{self._name}_{colname}' for colname in self.column_names]
+        right_names = [f'{table_right._name}_{colname}' for colname in table_right.column_names]
+
+        # define the new tables name, its column names and types
+        join_table_name = f'{self._name}_sort_merge_join_{table_right._name}'
+        join_table_colnames = left_names+right_names
+        join_table_coltypes = self.column_types+table_right.column_types
+        join_table = Table(name=join_table_name, column_names=join_table_colnames, column_types= join_table_coltypes)
+
+        if column_index_right != table_right.pk_idx:
+            raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
+
+        self._sort(column_name_left, asc=asc)
+        table_right._sort(column_name_right, asc=asc)
+
+
+        for row_left in self.data:
+            join_result =  False
+            left_value = row_left[column_index_left]
+            for row_right in table_right.data:
+                right_value = row_right[column_index_right]
+                no_of_ops+=1
+                if get_op(operator, left_value, right_value): #EQ_OP
+                    join_result = True
+                    join_table._insert(row_left+row_right)
+                if operator == "=":
+                    if left_value < right_value:
+                        break
+                elif operator == "<":
+                    if left_value >= right_value:
+                        break
+                elif operator == "<=":
+                    if left_value > right_value:
+                        break
+                elif operator == ">=":
+                    if left_value < right_value:
+                        break
+                elif operator == ">":
+                    if left_value <= right_value:
+                        break
+
+
+        return join_table
+
 
     def show(self, no_of_rows=None, is_locked=False):
         '''

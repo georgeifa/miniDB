@@ -200,7 +200,6 @@ class Database:
         '''
         Change the type of the specified column and cast all the prexisting values.
         Basically executes type(value) for every value in column and saves
-
         table_name -> table's name (needs to exist in database)
         column_name -> the column that will be casted (needs to exist in table)
         cast_type -> needs to be a python type like str int etc. NOT in ''
@@ -217,7 +216,6 @@ class Database:
     def insert(self, table_name, row, lock_load_save=True):
         '''
         Inserts into table
-
         table_name -> table's name (needs to exist in database)
         row -> a list of the values that are going to be inserted (will be automatically casted to predifined type)
         lock_load_save -> If false, user need to load, lock and save the states of the database (CAUTION). Usefull for bulk loading
@@ -246,14 +244,12 @@ class Database:
     def update(self, table_name, set_value, set_column, condition):
         '''
         Update the value of a column where condition is met.
-
         table_name -> table's name (needs to exist in database)
         set_value -> the new value of the predifined column_name
         set_column -> the column that will be altered
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         '''
         self.load(self.savedir)
@@ -268,12 +264,10 @@ class Database:
     def delete(self, table_name, condition):
         '''
         Delete rows of a table where condition is met.
-
         table_name -> table's name (needs to exist in database)
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         '''
         self.load(self.savedir)
@@ -293,20 +287,17 @@ class Database:
                top_k=None, save_as=None, return_object=False):
         '''
         Selects and outputs a table's data where condtion is met.
-
         table_name -> table's name (needs to exist in database)
         columns -> The columns that will be part of the output table (use '*' to select all the available columns)
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         order_by -> A column name that signals that the resulting table should be ordered based on it. Def: None (no ordering)
         asc -> If True order by will return results using an ascending order. Def: False
         top_k -> A number (int) that defines the number of rows that will be returned. Def: None (all rows)
         save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
         return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
-
         '''
         self.load(self.savedir)
         if self.is_locked(table_name):
@@ -333,7 +324,6 @@ class Database:
     def show_table(self, table_name, no_of_rows=None):
         '''
         Print a table using a nice tabular design (tabulate)
-
         table_name -> table's name (needs to exist in database)
         '''
         self.load(self.savedir)
@@ -344,7 +334,6 @@ class Database:
     def sort(self, table_name, column_name, asc=False):
         '''
         Sorts a table based on a column
-
         table_name -> table's name (needs to exist in database)
         column_name -> the column that will be used to sort
         asc -> If True sort will return results using an ascending order. Def: False
@@ -367,7 +356,6 @@ class Database:
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
         return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
@@ -395,7 +383,6 @@ class Database:
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
         return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
@@ -423,7 +410,6 @@ class Database:
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
         return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
@@ -451,7 +437,6 @@ class Database:
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
         return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
@@ -479,7 +464,6 @@ class Database:
         condition -> a condition using the following format :
                     'column[<,<=,==,>=,>]value' or
                     'value[<,<=,==,>=,>]column'.
-
                     operatores supported -> (<,<=,==,>=,>)
         save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
         return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
@@ -507,10 +491,41 @@ class Database:
             else:
                 res.show()
 
+
+
+
+
+    def sort_merge_join(self, left_table_name, right_table_name, condition, save_as=None, return_object=False):
+        '''
+        Join two tables that are part of the database where condition is met.
+        left_table_name -> left table's name (needs to exist in database)
+        right_table_name -> right table's name (needs to exist in database)
+        condition -> a condition using the following format :
+                    'column[<,<=,==,>=,>]value' or
+                    'value[<,<=,==,>=,>]column'.
+                    operatores supported -> (<,<=,==,>=,>)
+        save_as -> The name that will be used to save the resulting table in the database. Def: None (no save)
+        return_object -> If true, the result will be a table object (usefull for internal usage). Def: False (the result will be printed)
+        '''
+        self.load(self.savedir)
+        if self.is_locked(left_table_name) or self.is_locked(right_table_name):
+            print(f'Table/Tables are currently locked')
+            return
+
+        res = self.tables[left_table_name]._sort_merge_join(self.tables[right_table_name], condition)
+        if save_as is not None:
+            res._name = save_as
+            self.table_from_object(res)
+        else:
+            if return_object:
+                return res
+            else:
+                res.show()
+
+
     def lockX_table(self, table_name):
         '''
         Locks the specified table using the exclusive lock (X)
-
         table_name -> table's name (needs to exist in database)
         '''
         if table_name[:4]=='meta':
@@ -523,7 +538,6 @@ class Database:
     def unlock_table(self, table_name):
         '''
         Unlocks the specified table that is exclusivelly locked (X)
-
         table_name -> table's name (needs to exist in database)
         '''
         self.tables['meta_locks']._update_row(False, 'locked', f'table_name=={table_name}')
@@ -533,7 +547,6 @@ class Database:
     def is_locked(self, table_name):
         '''
         Check whether the specified table is exclusivelly locked (X)
-
         table_name -> table's name (needs to exist in database)
         '''
         if table_name[:4]=='meta':  # meta tables will never be locked (they are internal)
@@ -600,7 +613,6 @@ class Database:
     def _add_to_insert_stack(self, table_name, indexes):
         '''
         Added the supplied indexes to the insert stack of the specified table
-
         table_name -> table's name (needs to exist in database)
         indexes -> The list of indexes that will be added to the insert stack (the indexes of the newly deleted elements)
         '''
@@ -610,7 +622,6 @@ class Database:
     def _get_insert_stack_for_table(self, table_name):
         '''
         Return the insert stack of the specified table
-
         table_name -> table's name (needs to exist in database)
         '''
         return self.tables['meta_insert_stack']._select_where('*', f'table_name=={table_name}').indexes[0]
@@ -620,7 +631,6 @@ class Database:
     def _update_meta_insert_stack_for_tb(self, table_name, new_stack):
         '''
         Replaces the insert stack of a table with the one that will be supplied by the user
-
         table_name -> table's name (needs to exist in database)
         new_stack -> the stack that will be used to replace the existing one.
         '''
@@ -632,7 +642,6 @@ class Database:
         '''
         Create an index on a specified table with a given name.
         Important: An index can only be created on a primary key. Thus the user does not specify the column
-
         table_name -> table's name (needs to exist in database)
         index_name -> name of the created index
         '''
@@ -655,7 +664,6 @@ class Database:
     def _construct_index(self, table_name, index_name):
         '''
         Construct a btree on a table and save.
-
         table_name -> table's name (needs to exist in database)
         index_name -> name of the created index
         '''
@@ -671,7 +679,6 @@ class Database:
     def _has_index(self, table_name):
         '''
         Check whether the specified table's primary key column is indexed
-
         table_name -> table's name (needs to exist in database)
         '''
         return table_name in self.tables['meta_indexes'].table_name
@@ -679,7 +686,6 @@ class Database:
     def _save_index(self, index_name, index):
         '''
         Save the index object
-
         index_name -> name of the created index
         index -> the actual index object (btree object)
         '''
@@ -694,7 +700,6 @@ class Database:
     def _load_idx(self, index_name):
         '''
         load and return the specified index
-
         index_name -> name of the created index
         '''
         f = open(f'{self.savedir}/indexes/meta_{index_name}_index.pkl', 'rb')
