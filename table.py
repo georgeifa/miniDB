@@ -627,13 +627,12 @@ class Table:
 
 
         for row_left in self.data:
-            join_result =  False
             left_value = row_left[column_index_left]
             join_table_tmp , no_of_ops = self._merging(row_left, table_right, column_index_right, join_table, operator, left_value, no_of_ops)
             if len(join_table_tmp.data) != 0:
+                print(f'##------ Join_tmp size -> {len(join_table_tmp.data)}')
                 for row_join_table_tmp in join_table_tmp.data:
-                    print(f'##------ Join_tmp size -> {len(join_table_tmp.data)}')
-                    print(f'##------ row_join -> {row_join_table_tmp}')                
+                    print(f'##------ row_join -> {row_join_table_tmp}')
                     join_table._insert(row_join_table_tmp)
 
         print(f'## Select ops no. -> {no_of_ops}')
