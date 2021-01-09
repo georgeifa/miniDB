@@ -629,7 +629,7 @@ class Table:
         for row_left in self.data:
             join_result =  False
             left_value = row_left[column_index_left]
-            join_table , no_of_ops = _merging(table_right,join_table,operator,left_value,no_of_ops)
+            join_table , no_of_ops = self._merging(table_right,join_table,operator,left_value,no_of_ops)
 
 
         print(f'## Select ops no. -> {no_of_ops}')
