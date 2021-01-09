@@ -604,28 +604,7 @@ class Table:
         for row_left in self.data:
             join_result =  False
             left_value = row_left[column_index_left]
-            for row_right in table_right.data:
-                right_value = row_right[column_index_right]
-                no_of_ops+=1
-                if get_op(operator, left_value, right_value): #EQ_OP
-                    join_result = True
-                    join_table._insert(row_left+row_right)
-                else:
-                    if operator == "=":
-                        if left_value < right_value:
-                            break
-                    elif operator == "<":
-                        if left_value >= right_value:
-                            break
-                    elif operator == "<=":
-                        if left_value > right_value:
-                            break
-                    elif operator == ">=":
-                        if left_value < right_value:
-                            break
-                    elif operator == ">":
-                        if left_value <= right_value:
-                            break
+            join_table , no_of_ops = _merging(table_right,join_table,operator,left_value,no_of_ops)
 
 
         print(f'## Select ops no. -> {no_of_ops}')
@@ -633,6 +612,31 @@ class Table:
         print(f'# Right table size -> {len(table_right.data)}')
 
         return join_table
+
+    def _merging(table_right :Table,join_table :Table,operator,left_value,no_of_ops):
+        for row_right in table_right.data:
+            right_value = row_right[column_index_right]
+            no_of_ops+=1
+            if get_op(operator, left_value, right_value): #EQ_OP
+                join_table._insert(row_left+row_right)
+            else:
+                if operator == "=":
+                    if left_value < right_value:
+                        break
+                elif operator == "<":
+                    if left_value >= right_value:
+                        break
+                elif operator == "<=":
+                    if left_value > right_value:
+                        break
+                elif operator == ">=":
+                    if left_value < right_value:
+                        break
+                elif operator == ">":
+                    if left_value <= right_value:
+                        break
+
+            return join_table , no_of_ops
 
 
     def show(self, no_of_rows=None, is_locked=False):
