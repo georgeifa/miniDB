@@ -613,7 +613,7 @@ class Table:
                 else:
                     if operator == '==':
                         if left_value < right_value:
-                            #print(f'YOU ARE IN LOOP {loop_no}')
+                            print(f'YOU ARE IN LOOP {loop_no}')
                             break
                     elif operator == "<":
                         if left_value >= right_value:
@@ -627,7 +627,7 @@ class Table:
                     elif operator == ">":
                         if left_value <= right_value:
                             break
-            #print(f'YOU ARE OUT OF LOOP {loop_no}')
+            print(f'YOU ARE OUT OF LOOP {loop_no}')
 
 
         print(f'## Select ops no. -> {no_of_ops}')
