@@ -629,7 +629,7 @@ class Table:
         for row_left in self.data:
             left_value = row_left[column_index_left]
             join_table_tmp , no_of_ops = self._merging(row_left, table_right, column_index_right, join_table, operator, left_value, no_of_ops)
-            if len(join_table_tmp.data) != 0:
+            if join_table_tmp.data != join_table.data:
                 print(f'##------ Join_tmp size -> {len(join_table_tmp.data)}')
                 print(f'##------ Join_tmp -> {join_table_tmp.data}')
                 for row_join_table_tmp in join_table_tmp.data:
