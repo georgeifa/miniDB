@@ -625,10 +625,11 @@ class Table:
         self._sort(column_name_left, asc=asc)
         table_right._sort(column_name_right, asc=asc)
 
+        join_table_tmp , no_of_ops = self._merging(row_left, table_right, column_index_right, join_table, operator, left_value, no_of_ops)
+
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
-            join_table_tmp , no_of_ops = self._merging(row_left, table_right, column_index_right, join_table, operator, left_value, no_of_ops)
             if join_table_tmp.data != join_table.data:
                 print(f'##------ Join_tmp size -> {len(join_table_tmp.data)}')
                 print(f'##------ Join_tmp -> {join_table_tmp.data}')
