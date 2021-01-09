@@ -564,7 +564,7 @@ class Table:
 
         return join_table
 
-    def _merging(self, table_right :Table,join_table :Table,operator,left_value,no_of_ops):
+    def _merging(self, table_right :Table,column_index_right,join_table :Table,operator,left_value,no_of_ops):
         for row_right in table_right.data:
             right_value = row_right[column_index_right]
             no_of_ops+=1
@@ -629,7 +629,7 @@ class Table:
         for row_left in self.data:
             join_result =  False
             left_value = row_left[column_index_left]
-            join_table , no_of_ops = self._merging(table_right,join_table,operator,left_value,no_of_ops)
+            join_table , no_of_ops = self._merging(table_right,join_table,column_index_right,operator,left_value,no_of_ops)
 
 
         print(f'## Select ops no. -> {no_of_ops}')
