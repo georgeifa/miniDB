@@ -594,40 +594,40 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
+        # we check that column that the condition is on is the PK as indexes support only this column
         if column_index_right != table_right.pk_idx:
             raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
 
+        # we are sorting both tables
         self._sort(column_name_left, asc=asc)
         table_right._sort(column_name_right, asc=asc)
 
 
         for row_left in self.data:
             left_value = row_left[column_index_left]
-            loop_no = 0
             for row_right in table_right.data:
-                loop_no+=1
                 right_value = row_right[column_index_right]
                 no_of_ops+=1
                 if get_op(operator, left_value, right_value): #EQ_OP
-                    join_table._insert(row_left+row_right)
-                else:
-                    if asc:
-                        if operator == '==':
+                    join_table._insert(row_left+row_right) #until here is the same as inner_join
+                else: #if it doesnt match compare the values
+                    if asc: #if the sorting is ascending
+                        if operator == '==': #if we want equal values we stop searching when the right value is greater than the left
                             if left_value < right_value:
                                 break
-                        elif operator == "<":
+                        elif operator == "<":#if we want lesser left value we stop searching when the left value is greater or equal than the right
                             if left_value >= right_value:
                                 break
-                        elif operator == "<=":
+                        elif operator == "<=":#if we want lesser or equal left value we stop searching when the left value is greater than the right
                             if left_value > right_value:
                                 break
-                        elif operator == ">=":
+                        elif operator == ">=":#if we want greater or equal left value we stop searching when the right value is greater than the left
                             if left_value < right_value:
                                 break
-                        elif operator == ">":
+                        elif operator == ">": #if we want greater left value we stop searching when the right value is greater or eqaul than the left
                             if left_value <= right_value:
                                 break
-                    else:
+                    else: #if the sorting is descending. Here the conditions are the opossites of the ascending ones
                         if operator == '==':
                             if left_value >= right_value:
                                 break
@@ -645,6 +645,7 @@ class Table:
                                 break
 
 
+        #checked that it does less ops no.
         print(f'## Select ops no. -> {no_of_ops}')
         print(f'# Left table size -> {len(self.data)}')
         print(f'# Right table size -> {len(table_right.data)}')
