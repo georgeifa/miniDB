@@ -564,7 +564,7 @@ class Table:
 
         return join_table
 
-    def _sort_merge_join(self, table_right: Table, condition):
+    def _sort_merge_join(self, table_right: Table, condition , asc = False):
         '''
         Join table (left) with a supplied table (right). Show all rows from left table and the matched ones from the right one
         '''
