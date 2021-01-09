@@ -611,6 +611,7 @@ class Table:
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
                 else:
+                    print(f'YOU ARE IN LOOP {loop_no}')
                     if operator == '=':
                         if left_value < right_value:
                             print(f'YOU ARE IN LOOP {loop_no}')
