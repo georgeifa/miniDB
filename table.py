@@ -541,8 +541,6 @@ class Table:
         join_table = Table(name=join_table_name, column_names=join_table_colnames, column_types= join_table_coltypes)
 
 
-        # count the number of operations (<,> etc)
-        no_of_ops = 0
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
@@ -589,6 +587,12 @@ class Table:
         join_table_colnames = left_names+right_names
         join_table_coltypes = self.column_types+table_right.column_types
         join_table = Table(name=join_table_name, column_names=join_table_colnames, column_types= join_table_coltypes)
+
+
+        # count the number of operations (<,> etc)
+        no_of_ops = 0
+        # this code is dumb on purpose... it needs to illustrate the underline technique
+        # for each value in left column and right column, if condition, append the corresponding row to the new table
 
         if column_index_right != table_right.pk_idx:
             raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
