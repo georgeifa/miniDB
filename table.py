@@ -594,8 +594,8 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
-        #if column_index_right != table_right.pk_idx:
-        #    raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
+        if column_index_right != table_right.pk_idx:
+            raise Exception(f'Column is not PK. Indexes suport only PK columns. Aborting...')
 
         self._sort(column_name_left, asc=asc)
         table_right._sort(column_name_right, asc=asc)
@@ -613,7 +613,7 @@ class Table:
                 else:
                     if operator == '==':
                         if left_value < right_value:
-                            print(f'YOU ARE IN LOOP {loop_no}')
+                            #print(f'YOU ARE IN LOOP {loop_no}')
                             break
                     elif operator == "<":
                         if left_value >= right_value:
@@ -627,8 +627,7 @@ class Table:
                     elif operator == ">":
                         if left_value <= right_value:
                             break
-            print(f'YOU ARE OUT OF LOOP {loop_no}')
-            print(f'operator equals {operator == "=="}')
+            #print(f'YOU ARE OUT OF LOOP {loop_no}')
 
 
         print(f'## Select ops no. -> {no_of_ops}')
