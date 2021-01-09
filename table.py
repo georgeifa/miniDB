@@ -631,7 +631,7 @@ class Table:
             left_value = row_left[column_index_left]
             join_table_tmp , no_of_ops = self._merging(row_left, table_right, column_index_right, join_table, operator, left_value, no_of_ops)
             if len(join_table_tmp.data) != 0:
-                for row_join_table_tmp in join_table_tmp.data
+                for row_join_table_tmp in join_table_tmp.data:
                 join_table._insert(row_join_table_tmp)
 
         print(f'## Select ops no. -> {no_of_ops}')
