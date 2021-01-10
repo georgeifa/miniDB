@@ -4,7 +4,7 @@ import pickle
 import os
 from misc import get_op, split_condition
 
-from join_table import JOINS_table
+from joins_table import JOINS_table
 
 class Table:
     '''
