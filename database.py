@@ -7,7 +7,7 @@ from btree import Btree
 import shutil
 from misc import split_condition
 
-import JOINS_database
+from joins_database import JOINS_database
 
 
 class Database:

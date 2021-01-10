@@ -6,7 +6,10 @@ import os
 from btree import Btree
 import shutil
 from misc import split_condition
-import database
+from database import Database
+
+class JOINS_database:
+
 
     def left_join(self, left_table_name, right_table_name, condition, save_as=None, return_object=False):
         '''

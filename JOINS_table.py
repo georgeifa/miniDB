@@ -1,7 +1,7 @@
-import table
+from table import Table
 
 
-
+class JOINS_table:
 
     def _left_join(self, table_right: Table, condition):
         '''
