@@ -577,11 +577,11 @@ class Database:
 
 
 
-        """
-        |||---------------------------------------------------------------------------------------------------------------------||||
-                                        ΑΠΟ ΕΔΩ ΚΑΙ ΚΑΤΩ ΞΕΚΙΝΑΕΙ Ο ΝΕΟΣ ΚΩΔΙΚΑΣ
-        |||---------------------------------------------------------------------------------------------------------------------||||
-        """
+
+
+
+
+
 
 
 
@@ -614,6 +614,10 @@ class Database:
             else:
                 res.show()
 
+
+
+
+
     def right_join(self, left_table_name, right_table_name, condition, save_as=None, return_object=False):
         '''
         Join two tables that are part of the database where condition is met.
@@ -641,6 +645,10 @@ class Database:
             else:
                 res.show()
 
+
+
+
+
     def outer_join(self, left_table_name, right_table_name, condition, save_as=None, return_object=False):
         '''
         Join two tables that are part of the database where condition is met.
@@ -667,6 +675,9 @@ class Database:
                 return res
             else:
                 res.show()
+
+
+
 
     def index_nested_loop_join(self, left_table_name, right_table_name, condition, save_as=None, return_object=False):
         '''
