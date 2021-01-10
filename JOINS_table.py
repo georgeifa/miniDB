@@ -1,5 +1,3 @@
-from table import Table
-
 
 class JOINS_table:
 
