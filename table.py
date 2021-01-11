@@ -697,23 +697,7 @@ class Table:
                     if asc: #if the sorting is ascending
                         if(break_when_ascending(operator,left_value,right_value)):
                             break
-                    """
-                        if operator == '==': #if we want equal values we stop searching when the right value is greater than the left
-                            if left_value < right_value:
-                                break
-                        elif operator == "<":#if we want lesser left value we stop searching when the left value is greater or equal than the right
-                            if left_value >= right_value:
-                                break
-                        elif operator == "<=":#if we want lesser or equal left value we stop searching when the left value is greater than the right
-                            if left_value > right_value:
-                                break
-                        elif operator == ">=":#if we want greater or equal left value we stop searching when the right value is greater than the left
-                            if left_value < right_value:
-                                break
-                        elif operator == ">": #if we want greater left value we stop searching when the right value is greater or eqaul than the left
-                            if left_value <= right_value:
-                                break
-                    """
+
                     else: #if the sorting is descending. Here the conditions are the opossites of the ascending ones
                         if operator == '==':
                             if left_value >= right_value:
