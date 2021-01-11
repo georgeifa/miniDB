@@ -4,6 +4,9 @@ import pickle
 import os
 from misc import get_op, split_condition
 
+import pandas as pd
+import numpy as np
+
 class Table:
     '''
     Table object represents a table inside a database
@@ -564,13 +567,13 @@ class Table:
                         join_table._insert(row_left+row_right)
                         hasMatch = True
                 if not hasMatch:
-                    #for column in table_right.column_types:
-                    #    if column == type(1) or column == type(1.2):
-                    #        row_null.append(0)
-                    #    else:
-                    #        row_null.append(None)
+                    for column in table_right.column_types:
+                        if column == type(1) or column == type(1.2):
+                            row_null.append(np.nan)
+                        else:
+                            row_null.append(None)
                     #join_table._insert(row_left + row_null)
-                    row_null = [None for _ in range(len(table_right.column_names))]
+                    #row_null = [np.nan for _ in range(len(table_right.column_names))]
                     join_table._insert(row_left + row_null)
 
             for row_right in table_right.data:
@@ -583,13 +586,13 @@ class Table:
                     if get_op(operator, left_value, right_value): #EQ_OP
                         hasMatch = True
                 if not hasMatch:
-                    #for column in self.column_types:
-                    #    if column == type(1) or column == type(1.2):
-                    #        row_null.append(0)
-                    #    else:
-                    #        row_null.append(None)
+                    for column in self.column_types:
+                        if column == type(1) or column == type(1.2):
+                            row_null.append(np.nan)
+                        else:
+                            row_null.append(None)
                     #join_table._insert([None for _ in range(row_null + row_right)
-                    row_null = [None for _ in range(len(self.column_names))]
+                    #row_null = [self.Nones for _ in range(len(self.column_names))]
 
                     join_table._insert(row_null + row_right)
 
