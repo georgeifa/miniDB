@@ -548,13 +548,13 @@ class Table:
             no_of_ops = 0
             # this code is dumb on purpose... it needs to illustrate the underline technique
             # for each value in left column and right column, if condition, append the corresponding row to the new table
-            row_null =[]
+            #row_null =[]
 
             #outer join works with a combination of the left and right join
             #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not
 
             for row_left in self.data:
-                row_null.clear()
+                #row_null.clear()
                 hasMatch =  False
                 left_value = row_left[column_index_left]
                 for row_right in table_right.data:
@@ -564,12 +564,13 @@ class Table:
                         join_table._insert(row_left+row_right)
                         hasMatch = True
                 if not hasMatch:
-                    for column in table_right.column_types:
-                        if column == type(1) or column == type(1.2):
-                            row_null.append(0)
-                        else:
-                            row_null.append(None)
+                    #for column in table_right.column_types:
+                    #    if column == type(1) or column == type(1.2):
+                    #        row_null.append(0)
+                    #    else:
+                    #        row_null.append(None)
                     join_table._insert(row_left + row_null)
+                    join_table._insert(row_left + [None for _ in range(len(table_right.column_names))])
 
             for row_right in table_right.data:
                 row_null.clear()
@@ -581,12 +582,14 @@ class Table:
                     if get_op(operator, left_value, right_value): #EQ_OP
                         hasMatch = True
                 if not hasMatch:
-                    for column in self.column_types:
-                        if column == type(1) or column == type(1.2):
-                            row_null.append(0)
-                        else:
-                            row_null.append(None)
-                    join_table._insert(row_null + row_right)
+                    #for column in self.column_types:
+                    #    if column == type(1) or column == type(1.2):
+                    #        row_null.append(0)
+                    #    else:
+                    #        row_null.append(None)
+                    #join_table._insert([None for _ in range(row_null + row_right)
+                    join_table._insert([None for _ in range(len(self.column_names))] + row_right)
+
 
 
 
