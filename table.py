@@ -573,7 +573,7 @@ class Table:
                     join_table._insert(row_left + [None for _ in range(len(table_right.column_names))])
 
             for row_right in table_right.data:
-                row_null.clear()
+                #row_null.clear()
                 hasMatch =  False
                 right_value = row_right[column_index_right]
                 for row_left in self.data:
