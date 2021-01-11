@@ -4,6 +4,8 @@ import pickle
 import os
 from misc import get_op, split_condition
 
+from misc_for_Joins import break_when_ascending
+
 
 
 class Table:
@@ -590,6 +592,18 @@ class Table:
                             row_null.append(None)
                     join_table._insert(row_null + row_right)
 
+"""
+            for row_join in join_table.data:
+                if None in row_join:
+                    for col_join in join_table.column_names:
+                        if row_join[join_table.index(column_names)] is None:
+                            if()
+
+
+                            self.data[index] = [None for _ in range(len(self.column_names))
+
+
+"""
 
 
 
@@ -697,6 +711,9 @@ class Table:
                     join_table._insert(row_left+row_right) #until here is the same as inner_join
                 else: #if it doesnt match compare the values
                     if asc: #if the sorting is ascending
+                        if(break_when_ascending(operator,left_value,right_value)):
+                            break
+                    """
                         if operator == '==': #if we want equal values we stop searching when the right value is greater than the left
                             if left_value < right_value:
                                 break
@@ -712,6 +729,7 @@ class Table:
                         elif operator == ">": #if we want greater left value we stop searching when the right value is greater or eqaul than the left
                             if left_value <= right_value:
                                 break
+                    """
                     else: #if the sorting is descending. Here the conditions are the opossites of the ascending ones
                         if operator == '==':
                             if left_value >= right_value:
