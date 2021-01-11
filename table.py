@@ -592,21 +592,9 @@ class Table:
                             row_null.append(None)
                     join_table._insert(row_null + row_right)
 
-"""
-            for row_join in join_table.data:
-                if None in row_join:
-                    for col_join in join_table.column_names:
-                        if row_join[join_table.index(column_names)] is None:
-                            if()
-
-
-                            self.data[index] = [None for _ in range(len(self.column_names))
-
-
-"""
-        print(f'## Select ops no. -> {no_of_ops}')
-        print(f'# Left table size -> {len(self.data)}')
-        print(f'# Right table size -> {len(table_right.data)}')
+            print(f'## Select ops no. -> {no_of_ops}')
+            print(f'# Left table size -> {len(self.data)}')
+            print(f'# Right table size -> {len(table_right.data)}')
 
         return join_table
 
