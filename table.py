@@ -695,25 +695,11 @@ class Table:
                     join_table._insert(row_left+row_right) #until here is the same as inner_join
                 else: #if it doesnt match compare the values
                     if asc: #if the sorting is ascending
-                        if(break_when_ascending(operator,left_value,right_value)):
+                        if(break_when_ascending(operator,left_value,right_value)): # using to check when it should stop searching
                             break
-
                     else: #if the sorting is descending. Here the conditions are the opossites of the ascending ones
-                        if operator == '==':
-                            if left_value >= right_value:
-                                break
-                        elif operator == "<":
-                            if left_value < right_value:
-                                break
-                        elif operator == "<=":
-                            if left_value <= right_value:
-                                break
-                        elif operator == ">=":
-                            if left_value >= right_value:
-                                break
-                        elif operator == ">":
-                            if left_value > right_value:
-                                break
+                        if(break_when_descending(operator,left_value,right_value)): # using to check when it should stop searching
+                            break
 
 
         #checked that it does less ops no.
