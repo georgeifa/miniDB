@@ -569,7 +569,7 @@ class Table:
                     #        row_null.append(0)
                     #    else:
                     #        row_null.append(None)
-                    join_table._insert(row_left + row_null)
+                    #join_table._insert(row_left + row_null)
                     join_table._insert(row_left + [None for _ in range(len(table_right.column_names))])
 
             for row_right in table_right.data:
