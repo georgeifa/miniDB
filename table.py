@@ -4,8 +4,7 @@ import pickle
 import os
 from misc import get_op, split_condition
 
-import pandas as pd
-import numpy as np
+import math
 
 class Table:
     '''
@@ -569,7 +568,7 @@ class Table:
                 if not hasMatch:
                     for column in table_right.column_types:
                         if column == type(1) or column == type(1.2):
-                            row_null.append(np.nan)
+                            row_null.append(Nan)
                         else:
                             row_null.append(None)
                     #join_table._insert(row_left + row_null)
@@ -588,7 +587,7 @@ class Table:
                 if not hasMatch:
                     for column in self.column_types:
                         if column == type(1) or column == type(1.2):
-                            row_null.append(np.nan)
+                                row_null.append(NaN)
                         else:
                             row_null.append(None)
                     #join_table._insert([None for _ in range(row_null + row_right)
