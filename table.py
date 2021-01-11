@@ -596,7 +596,7 @@ class Table:
             print(f'# Left table size -> {len(self.data)}')
             print(f'# Right table size -> {len(table_right.data)}')
 
-        return join_table
+            return join_table
 
     def _Index_Nested_Loop_join(self, table_right: Table, bt, condition ):
         '''
