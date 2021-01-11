@@ -8,6 +8,6 @@ def break_when_ascending(operator,left,right):
     }
 
     try:
-        return switcher[operator](left,right)
+        return switcher[operator]
     except TypeError:  # if a or b is None (deleted record), python3 raises typerror
-        return False        
+        return False
