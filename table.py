@@ -548,13 +548,13 @@ class Table:
             no_of_ops = 0
             # this code is dumb on purpose... it needs to illustrate the underline technique
             # for each value in left column and right column, if condition, append the corresponding row to the new table
-            #row_null =[]
+            row_null =[]
 
             #outer join works with a combination of the left and right join
             #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not
 
             for row_left in self.data:
-                #row_null.clear()
+                row_null.clear()
                 hasMatch =  False
                 left_value = row_left[column_index_left]
                 for row_right in table_right.data:
@@ -570,10 +570,11 @@ class Table:
                     #    else:
                     #        row_null.append(None)
                     #join_table._insert(row_left + row_null)
-                    join_table._insert(row_left + [None for _ in range(len(table_right.column_names))])
+                    row_null = [None for _ in range(len(table_right.column_names))]
+                    join_table._insert(row_left + row_null)
 
             for row_right in table_right.data:
-                #row_null.clear()
+                row_null.clear()
                 hasMatch =  False
                 right_value = row_right[column_index_right]
                 for row_left in self.data:
@@ -588,7 +589,9 @@ class Table:
                     #    else:
                     #        row_null.append(None)
                     #join_table._insert([None for _ in range(row_null + row_right)
-                    join_table._insert([None for _ in range(len(self.column_names))] + row_right)
+                    row_null = [None for _ in range(len(self.column_names))]
+
+                    join_table._insert(row_null + row_right)
 
 
 
