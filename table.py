@@ -579,6 +579,10 @@ class Table:
                         #    row_null.append(None)
                     join_table._insert(row_left + row_null)
                     for casted_col_ind in range(len(casted_col)):
+                        print(f'## casted_col_ind. -> {casted_col_ind}')
+                        print(f'## casted_col col name -> {casted_col[casted_col_ind][0]}')
+                        print(f'## casted_col col type -> {casted_col[casted_col_ind][1]}')
+
                         join_table._cast_column(casted_col[casted_col_ind][0],casted_col[casted_col_ind][1])
 
 
