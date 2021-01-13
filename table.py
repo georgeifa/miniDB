@@ -577,8 +577,7 @@ class Table:
                             row_null.append(int())
                         else:
                             row_null.append(None)
-                        print(f'{join_table.columns}')
-                        column_to_change.append(join_table.columns.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
+                        column_to_change.append(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
                     join_table._insert(row_left + row_null)
 
                     for ind in column_to_change:
@@ -603,7 +602,7 @@ class Table:
                             row_null.append(int())
                         else:
                             row_null.append(None)
-                        column_to_change.append(join_table.columns.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
+                        column_to_change.append(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
                     join_table._insert(row_null + row_right)
 
                     for ind in column_to_change:
