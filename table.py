@@ -455,20 +455,20 @@ class Table:
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
                     hasMatch = True #if you find a matching row make it true
-                if not hasMatch: #if there is no match
-                    for column_idx in range(table_right._no_of_columns): #for the columns of the right table
-                        if table_right.column_types[column_idx] == type(1) or table_right.column_types[column_idx] == type(1.2): #if the column type is a number
-                            row_null.append(0) # append a default value (doesnt matter which value)
-                        else:
-                            row_null.append(None) # else append None (also doesnt matter but it also works automatically for booleans)
-                        column_to_change.append(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_idx]}')) # get the column index in the join_table
-                    join_table._insert(row_left + row_null) #insert the row with the value of the left row and the dummy values
+            if not hasMatch: #if there is no match
+                for column_idx in range(table_right._no_of_columns): #for the columns of the right table
+                    if table_right.column_types[column_idx] == type(1) or table_right.column_types[column_idx] == type(1.2): #if the column type is a number
+                        row_null.append(0) # append a default value (doesnt matter which value)
+                    else:
+                        row_null.append(None) # else append None (also doesnt matter but it also works automatically for booleans)
+                    column_to_change.append(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_idx]}')) # get the column index in the join_table
+                join_table._insert(row_left + row_null) #insert the row with the value of the left row and the dummy values
 
-                    for ind in column_to_change: # for every column index in the column_to_change list
-                        join_table.data[len(join_table.data)-1][ind] = 'None' #replace the values of the last row and the column saved from befor with 'None'
-                    join_table._update() #update the table
+                for ind in column_to_change: # for every column index in the column_to_change list
+                    join_table.data[len(join_table.data)-1][ind] = 'None' #replace the values of the last row and the column saved from befor with 'None'
+                join_table._update() #update the table
 
-                    #we tryed with None (the NoneObject) but it displayed just a blank space
+                #we tryed with None (the NoneObject) but it displayed just a blank space
 
         print(f'## Select ops no. -> {no_of_ops}')
         print(f'# Left table size -> {len(self.data)}')
