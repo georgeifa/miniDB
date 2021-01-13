@@ -557,7 +557,8 @@ class Table:
 
             #outer join works with a combination of the left and right join
             #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not
-            casted_col = []
+
+            #column_to_change = []
 
             for row_left in self.data:
                 row_null.clear()
@@ -570,16 +571,16 @@ class Table:
                         join_table._insert(row_left+row_right)
                         hasMatch = True
                 if not hasMatch:
-                    for column_index_right in range(table_right._no_of_columns):
-                        if table_right.column_types[column_index_right] != type("string"):
-                            casted_col.append([f'{table_right._name}_{table_right.column_names[column_index_right]}',table_right.column_types[column_index_right]])
-                            join_table._cast_column(f'{table_right._name}_{table_right.column_names[column_index_right]}',str)
-                        row_null.append(None)
-                        #else:
-                        #    row_null.append(None)
+                    for column_idx in range(table_right._no_of_columns):
+                        if table_right.column_types[column_idx] == type(1) or table_right.column_types[column_idx] == type(1.2):
+                            row_null.append(int())
+                        else:
+                            row_null.append(None)
+                        #column_to_change.append(f'{table_right._name}_{table_right.column_names[column_idx]}')
                     join_table._insert(row_left + row_null)
-                    for casted_col_ind in range(len(casted_col)):
-                        join_table._cast_column(casted_col[casted_col_ind][0],casted_col[casted_col_ind][1])
+                    #for colname in column_to_change:
+
+                    #self.data[index] = [None for _ in range(len(self.column_names))]
 
 
             for row_right in table_right.data:
@@ -592,14 +593,14 @@ class Table:
                     if get_op(operator, left_value, right_value): #EQ_OP
                         hasMatch = True
                 if not hasMatch:
-                    for column_index_left in range(self._no_of_columns):
-                        if self.column_types[column_index_left] != type("string"):
-                            casted_col.append([f'{table_right._name}_{table_right.column_names[column_index_right]}',table_right.column_types[column_index_right]])
-                            join_table._cast_column(f'{self._name}_{self.column_names[column_index_left]}',str)
-                        row_null.append(None)
+                    for column in self.column_types:
+                        if column == type(1) or column == type(1.2):
+                            row_null.append(int())
+                        else:
+                            row_null.append(None)
                     join_table._insert(row_null + row_right)
-                    for casted_col_ind in range(len(casted_col)):
-                        join_table._cast_column(casted_col[casted_col_ind][0],casted_col[casted_col_ind][1])
+
+
 
             print(f'## Select ops no. -> {no_of_ops}')
             print(f'# Left table size -> {len(self.data)}')
