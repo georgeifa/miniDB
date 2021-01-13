@@ -4,6 +4,7 @@ import pickle
 import os
 from misc import get_op, split_condition
 
+import math
 from misc_for_Joins import break_when_ascending, break_when_descending
 
 
@@ -570,7 +571,7 @@ class Table:
                 if not hasMatch:
                     for column in table_right.column_types:
                         if column == type(1) or column == type(1.2):
-                            row_null.append(0)
+                            row_null.append(math.nan)
                         else:
                             row_null.append(None)
                     join_table._insert(row_left + row_null)
@@ -586,10 +587,10 @@ class Table:
                         hasMatch = True
                 if not hasMatch:
                     for column in self.column_types:
-                        #if column == type(1) or column == type(1.2):
-                        #    row_null.append(0)
-                        #else:
-                        row_null.append(None)
+                        if column == type(1) or column == type(1.2):
+                            row_null.append(0)
+                        else:
+                            row_null.append(None)
                     join_table._insert(row_null + row_right)
 
             print(f'## Select ops no. -> {no_of_ops}')
