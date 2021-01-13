@@ -438,11 +438,15 @@ class Table:
         # this code is dumb on purpose... it needs to illustrate the underline technique
         # for each value in left column and right column, if condition, append the corresponding row to the new table
 
-        #create a row with NoneObjects or 0  (for str is None , for bool is false and for numbers is 0)
+        #create a row with NoneObjects or 0  (for str is None , for bool is false and for numbers is 0 . The values do not matter)
         row_null =[]
+
+        #the column names that are going to be change to 'None'
+        column_to_change = []
 
         for row_left in self.data:
             row_null.clear() # clear the null row for every new row of the left table
+            column_to_change.clear() # clear the collumn names that are going to be changed
             hasMatch =  False # a bool that shows if the current row of the left table has found a matching row from the right table
             left_value = row_left[column_index_left]
             for row_right in table_right.data:
@@ -451,14 +455,20 @@ class Table:
                 if get_op(operator, left_value, right_value): #EQ_OP
                     join_table._insert(row_left+row_right)
                     hasMatch = True #if you find a matching row make it true
-            if not hasMatch: #if no matching row is found
-                for column in table_right.column_types: # for every column in the right table
-                    if column == type(1) or column == type(1.2): # check the type of the column
-                        row_null.append(0) #if its a number add 0 to the null_row list
-                    else:
-                        row_null.append(None)# else add none
-                join_table._insert(row_left + row_null) # add the new row to the join table
+                if not hasMatch: #if there is no match
+                    for column_idx in range(table_right._no_of_columns): #for the columns of the right table
+                        if table_right.column_types[column_idx] == type(1) or table_right.column_types[column_idx] == type(1.2): #if the column type is a number
+                            row_null.append(0) # append a default value (doesnt matter which value)
+                        else:
+                            row_null.append(None) # else append None (also doesnt matter but it also works automatically for booleans)
+                        column_to_change.append(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_idx]}')) # get the column index in the join_table
+                    join_table._insert(row_left + row_null) #insert the row with the value of the left row and the dummy values
 
+                    for ind in column_to_change: # for every column index in the column_to_change list
+                        join_table.data[len(join_table.data)-1][ind] = 'None' #replace the values of the last row and the column saved from befor with 'None'
+                    join_table._update() #update the table
+
+                    #we tryed with None (the NoneObject) but it displayed just a blank space
 
         print(f'## Select ops no. -> {no_of_ops}')
         print(f'# Left table size -> {len(self.data)}')
@@ -498,9 +508,12 @@ class Table:
             #right join works with a similar way as the left join. Only difference is that it is inverted
             row_null =[]
 
+            #the column names that are going to be change to 'None'
+            column_to_change = []
 
             for row_right in table_right.data:
                 row_null.clear()
+                column_to_change.clear()
                 hasMatch =  False
                 right_value = row_right[column_index_right]
                 for row_left in self.data:
@@ -510,12 +523,17 @@ class Table:
                         join_table._insert(row_left+row_right)
                         hasMatch = True
                 if not hasMatch:
-                    for column in self.column_types:
-                        if column == type(1) or column == type(1.2):
-                            row_null.append(0)
+                    for column_idx in range(self._no_of_columns):
+                        if self.column_types[column_idx] == type(1) or self.column_types[column_idx] == type(1.2):
+                            row_null.append(int())
                         else:
                             row_null.append(None)
+                        column_to_change.append(join_table.column_names.index(f'{self._name}_{self.column_names[column_idx]}'))
                     join_table._insert(row_null + row_right)
+
+                    for ind in column_to_change:
+                        join_table.data[len(join_table.data)-1][ind] = 'None'
+                    join_table._update()
 
 
             print(f'## Select ops no. -> {no_of_ops}')
@@ -606,7 +624,7 @@ class Table:
                     join_table._insert(row_null + row_right)
 
                     for ind in column_to_change:
-                        join_table.data[len(join_table.data)-1][ind] = None
+                        join_table.data[len(join_table.data)-1][ind] = 'None'
                     join_table._update()
 
 
