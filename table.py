@@ -581,7 +581,7 @@ class Table:
                     join_table._insert(row_left + row_null)
 
                     for ind in column_to_change:
-                        join_table.data[join_table.no_of_rows-1][ind] = None
+                        join_table.data[len(join_table.data)-1][ind] = None
                     join_table._update()
 
 
@@ -606,7 +606,7 @@ class Table:
                     join_table._insert(row_null + row_right)
 
                     for ind in column_to_change:
-                        join_table.data[join_table.no_of_rows-1][ind] = None
+                        join_table.data[len(join_table.data)-1][ind] = None
                     join_table._update()
 
 
