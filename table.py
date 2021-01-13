@@ -558,8 +558,6 @@ class Table:
             #outer join works with a combination of the left and right join
             #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not
 
-            a = None
-
             for row_left in self.data:
                 row_null.clear()
                 hasMatch =  False
@@ -571,11 +569,12 @@ class Table:
                         join_table._insert(row_left+row_right)
                         hasMatch = True
                 if not hasMatch:
-                    for column in table_right.column_types:
-                        if column == type(1) or column == type(1.2):
-                            row_null.append(a)
-                        else:
+                    for column_index_right in len(table_right.column_types):
+                        if table_right.column_types[column_index_right] != type("string"):
+                            join_table._cast_column(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_index_right]}'),str)
                             row_null.append(None)
+                        #else:
+                        #    row_null.append(None)
                     join_table._insert(row_left + row_null)
 
             for row_right in table_right.data:
@@ -588,10 +587,9 @@ class Table:
                     if get_op(operator, left_value, right_value): #EQ_OP
                         hasMatch = True
                 if not hasMatch:
-                    for column in self.column_types:
-                        if column == type(1) or column == type(1.2):
-                            row_null.append(a)
-                        else:
+                    for column_index_left in len(table_left.column_types):
+                        if table_left.column_types[column_index_left] != type("string"):
+                            join_table._cast_column(join_table.column_names.index(f'{table_left._name}_{table_left.column_names[column_index_left]}'),str)
                             row_null.append(None)
                     join_table._insert(row_null + row_right)
 
