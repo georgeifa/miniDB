@@ -570,6 +570,8 @@ class Table:
                         hasMatch = True
                 if not hasMatch:
                     for column_index_right in range(table_right._no_of_columns-1):
+                        print(f'## column index. -> {column_index_right}')
+                        print(f'## right # column. -> {table_right._no_of_columns}')            
                         if table_right.column_types[column_index_right] != type("string"):
                             join_table._cast_column(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_index_right]}'),str)
                         row_null.append(None)
@@ -590,7 +592,7 @@ class Table:
                     for column_index_left in range(table_left._no_of_columns-1):
                         if table_left.column_types[column_index_left] != type("string"):
                             join_table._cast_column(join_table.column_names.index(f'{table_left._name}_{table_left.column_names[column_index_left]}'),str)
-                            row_null.append(None)
+                        row_null.append(None)
                     join_table._insert(row_null + row_right)
 
             print(f'## Select ops no. -> {no_of_ops}')
