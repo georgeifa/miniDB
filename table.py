@@ -597,12 +597,12 @@ class Table:
                     if get_op(operator, left_value, right_value): #EQ_OP
                         hasMatch = True
                 if not hasMatch:
-                    for column in self.column_types:
-                        if column == type(1) or column == type(1.2):
+                    for column_idx in range(self._no_of_columns):
+                        if self.column_types[column_idx] == type(1) or self.column_types[column_idx] == type(1.2):
                             row_null.append(int())
                         else:
                             row_null.append(None)
-                        column_to_change.append(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
+                        column_to_change.append(join_table.column_names.index(f'{self._name}_{self.column_names[column_idx]}'))
                     join_table._insert(row_null + row_right)
 
                     for ind in column_to_change:
