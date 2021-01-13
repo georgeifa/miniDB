@@ -570,10 +570,9 @@ class Table:
                         hasMatch = True
                 if not hasMatch:
                     for column_index_right in range(table_right._no_of_columns-1):
-                        print(f'## Table right column {column_index_right} type. -> {table_right.column_types[column_index_right]}')                    
                         if table_right.column_types[column_index_right] != type("string"):
                             join_table._cast_column(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_index_right]}'),str)
-                            row_null.append(None)
+                        row_null.append(None)
                         #else:
                         #    row_null.append(None)
                     join_table._insert(row_left + row_null)
