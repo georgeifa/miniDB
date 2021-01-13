@@ -558,10 +558,11 @@ class Table:
             #outer join works with a combination of the left and right join
             #ONLY DIFFERENCE when doing the right_join part we dont insert if there is a match. Only when there is not
 
-            #column_to_change = []
+            column_to_change = []
 
             for row_left in self.data:
                 row_null.clear()
+                column_to_change.clear()
                 hasMatch =  False
                 left_value = row_left[column_index_left]
                 for row_right in table_right.data:
@@ -576,15 +577,18 @@ class Table:
                             row_null.append(int())
                         else:
                             row_null.append(None)
-                        #column_to_change.append(f'{table_right._name}_{table_right.column_names[column_idx]}')
+                        column_to_change.append(join_table.columns.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
                     join_table._insert(row_left + row_null)
-                    #for colname in column_to_change:
 
-                    #self.data[index] = [None for _ in range(len(self.column_names))]
+                    for ind in column_to_change:
+                        join_table.data[join_table.no_of_rows-1][ind] = None
+                    join_table._update()
+
 
 
             for row_right in table_right.data:
                 row_null.clear()
+                column_to_change.clear()                
                 hasMatch =  False
                 right_value = row_right[column_index_right]
                 for row_left in self.data:
@@ -598,7 +602,12 @@ class Table:
                             row_null.append(int())
                         else:
                             row_null.append(None)
+                        column_to_change.append(join_table.columns.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
                     join_table._insert(row_null + row_right)
+
+                    for ind in column_to_change:
+                        join_table.data[join_table.no_of_rows-1][ind] = None
+                    join_table._update()
 
 
 
