@@ -588,7 +588,7 @@ class Table:
                 if not hasMatch:
                     for column in self.column_types:
                         if column == type(1) or column == type(1.2):
-                            row_null.append(0)
+                            row_null.append(int(None))
                         else:
                             row_null.append(None)
                     join_table._insert(row_null + row_right)
