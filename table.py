@@ -572,7 +572,7 @@ class Table:
                     for column_index_right in range(table_right._no_of_columns):
                         if table_right.column_types[column_index_right] != type("string"):
                             print(f'## Join table # column. -> {join_table._no_of_columns}')
-                            print(f'## Join table index of column. -> {table_right._name}_{table_right.column_names[column_index_right]}')
+                            print(f"## Join table index of column. -> {join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_index_right]}')}")
 
                             join_table._cast_column(join_table.column_names.index(f'{table_right._name}_{table_right.column_names[column_index_right]}'),str)
                         row_null.append(None)
