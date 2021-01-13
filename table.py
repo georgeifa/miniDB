@@ -578,6 +578,8 @@ class Table:
                         #else:
                         #    row_null.append(None)
                     join_table._insert(row_left + row_null)
+                    print(f'## casted_col. -> {casted_col}')
+
                     for casted_col_ind in range(len(casted_col)):
                         print(f'## casted_col_ind. -> {casted_col_ind}')
                         print(f'## casted_col col name -> {casted_col[casted_col_ind][0]}')
