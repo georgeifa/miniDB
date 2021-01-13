@@ -579,7 +579,7 @@ class Table:
                         #    row_null.append(None)
                     join_table._insert(row_left + row_null)
                     for casted_col_ind in range(len(casted_col)):
-                        join_table._cast_column(casted_col[ind,0],casted_col[ind,1])
+                        join_table._cast_column(casted_col[casted_col_ind,0],casted_col[casted_col_ind,1])
 
 
             for row_right in table_right.data:
@@ -594,12 +594,12 @@ class Table:
                 if not hasMatch:
                     for column_index_left in range(self._no_of_columns):
                         if self.column_types[column_index_left] != type("string"):
-                            casted_col.append([f'{table_right._name}_{table_right.column_names[column_index_right]}',table_right.column_types[column_index_right]])                            
+                            casted_col.append([f'{table_right._name}_{table_right.column_names[column_index_right]}',table_right.column_types[column_index_right]])
                             join_table._cast_column(f'{self._name}_{self.column_names[column_index_left]}',str)
                         row_null.append(None)
                     join_table._insert(row_null + row_right)
                     for casted_col_ind in range(len(casted_col)):
-                        join_table._cast_column(casted_col[ind,0],casted_col[ind,1])
+                        join_table._cast_column(casted_col[casted_col_ind,0],casted_col[casted_col_ind,1])
 
             print(f'## Select ops no. -> {no_of_ops}')
             print(f'# Left table size -> {len(self.data)}')
