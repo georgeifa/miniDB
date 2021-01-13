@@ -577,7 +577,7 @@ class Table:
                             row_null.append(int())
                         else:
                             row_null.append(None)
-                        print(f'{join_table.colname}')
+                        print(f'{join_table_colnames}')
                         column_to_change.append(join_table.columns.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
                     join_table._insert(row_left + row_null)
 
