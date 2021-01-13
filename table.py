@@ -577,6 +577,7 @@ class Table:
                             row_null.append(int())
                         else:
                             row_null.append(None)
+                        print(f'{join_table.colname}')
                         column_to_change.append(join_table.columns.index(f'{table_right._name}_{table_right.column_names[column_idx]}'))
                     join_table._insert(row_left + row_null)
 
@@ -588,7 +589,7 @@ class Table:
 
             for row_right in table_right.data:
                 row_null.clear()
-                column_to_change.clear()                
+                column_to_change.clear()
                 hasMatch =  False
                 right_value = row_right[column_index_right]
                 for row_left in self.data:
