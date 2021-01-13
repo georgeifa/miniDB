@@ -569,7 +569,7 @@ class Table:
                         join_table._insert(row_left+row_right)
                         hasMatch = True
                 if not hasMatch:
-                    for column_index_right in range(table_right._no_of_columns-1):
+                    for column_index_right in range(table_right._no_of_columns):
                         print(f'## column index. -> {column_index_right}')
                         print(f'## column name. -> {table_right.column_names[column_index_right]}')
                         print(f'## right # column. -> {table_right._no_of_columns}')
