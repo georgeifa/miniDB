@@ -571,7 +571,6 @@ class Table:
                 if not hasMatch:
                     for column_index_right in range(table_right._no_of_columns):
                         if table_right.column_types[column_index_right] != type("string"):
-                            print(f'## Join table # column. -> {join_table._no_of_columns}')
                             join_table._cast_column(f'{table_right._name}_{table_right.column_names[column_index_right]}',str)
                         row_null.append(None)
                         #else:
@@ -588,9 +587,9 @@ class Table:
                     if get_op(operator, left_value, right_value): #EQ_OP
                         hasMatch = True
                 if not hasMatch:
-                    for column_index_left in range(table_left._no_of_columns):
-                        if table_left.column_types[column_index_left] != type("string"):
-                            join_table._cast_column(join_table.column_names.index(f'{table_left._name}_{table_left.column_names[column_index_left]}'),str)
+                    for column_index_left in range(self._no_of_columns):
+                        if self.column_types[column_index_left] != type("string"):
+                            join_table._cast_column(f'{self._name}_{self.column_names[column_index_left]}',str)
                         row_null.append(None)
                     join_table._insert(row_null + row_right)
 
